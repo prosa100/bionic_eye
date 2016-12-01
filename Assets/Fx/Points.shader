@@ -54,11 +54,11 @@
 		
 		
 		float w = dist; //goes from zero to one.
-		
+		w *= 2;
+		//w *= w < 1;
 		//w = saturate(0.2+ .4*intesity - dist);
-		const float std = 0.035;
+		const float std = 0.07;
 		const float PI = 3.1415;
-
 		w = exp(-w*w / (2 * std*std)) / sqrt(2 * std*std*PI);
 
 
