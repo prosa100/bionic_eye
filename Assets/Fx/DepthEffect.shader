@@ -3,7 +3,7 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
-	_Speed("Speed", Float) = 3
+		_Speed("Speed", Float) = 3
 	}
 	SubShader
 	{
@@ -48,9 +48,12 @@
 				float x = depth % 1; // 1 m mod
 
 				float refDist = _ProjectionParams.z*frac(_Time.y * _Speed);
-				x = saturate(depth - refDist);
-				x = 1-abs(depth - refDist);
-				//return float4(x, x, x, 1);
+				//x = saturate(depth - refDist);
+				x = 0.1*abs(depth - refDist);
+				
+				x = saturate(depth*_Speed);
+				x = pow(depth, _Speed);
+				return float4(x, x, x, 1);
 				//now with technicolor!!!
 				return float4(depth, depth/10, 1/ depth, 1)%1;
 			}

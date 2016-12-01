@@ -53,11 +53,18 @@
 		float intesity = saturate(dot(col, float4(0.3, 0.4, 0.3, 0)));
 		
 		
-		float w = dist<intesity; //goes from zero to one.
+		float w = dist; //goes from zero to one.
 		
-		w = saturate(0.2+ .4*intesity - dist);
+		//w = saturate(0.2+ .4*intesity - dist);
+		const float std = 0.035;
+		const float PI = 3.1415;
 
-		w = saturate(.9- dist);
+		w = exp(-w*w / (2 * std*std)) / sqrt(2 * std*std*PI);
+
+
+		//w = saturate(.4- pow(dist,0.5));
+
+		//w = pow(w, 3);
 
 		//w *= w; // makes it apear square
 		//w = w > 0.1;	 //saturate(w);
