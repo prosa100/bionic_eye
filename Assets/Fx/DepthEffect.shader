@@ -1,9 +1,9 @@
-﻿Shader "Hidden/EdgeDetect"
+﻿Shader "Hidden/DepthEffect"
 {
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
-	_Scale("Scale", Float) = 0.01
+	_Speed("Speed", Float) = 3
 	}
 	SubShader
 	{
@@ -24,8 +24,6 @@
 				float2 uv : TEXCOORD0;
 			};
 
-			float _Scale;
-
 			struct v2f
 			{
 				float2 uv : TEXCOORD0;
@@ -41,24 +39,20 @@
 			}
 			
 			sampler2D _MainTex;
-
+			sampler2D _CameraDepthTexture;
+			float _Speed;
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 c = tex2D(_MainTex, i.uv);
-				fixed4 a = tex2D(_MainTex, i.uv + _Scale*float2(0, 1));
-				fixed4 b = tex2D(_MainTex, i.uv + _Scale*float2(1, 0));
-				
-				
-				
-				float4 d = abs(a - c ) + abs(b - c);
-				
-				float di = dot(d, float4(.2, .2, .1, 0));
-				float ci = dot(c, float4(.2, .2, .1, 0));
+				float de = tex2D(_CameraDepthTexture, i.uv).r;
+				float depth = LinearEyeDepth(de);
+				float x = depth % 1; // 1 m mod
 
-
-				float x = di+ ci;
-
-				return float4(x,x,x,1);
+				float refDist = _ProjectionParams.z*frac(_Time.y * _Speed);
+				x = saturate(depth - refDist);
+				x = 1-abs(depth - refDist);
+				//return float4(x, x, x, 1);
+				//now with technicolor!!!
+				return float4(depth, depth/10, 1/ depth, 1)%1;
 			}
 			ENDCG
 		}

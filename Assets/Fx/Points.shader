@@ -55,8 +55,12 @@
 		
 		float w = dist<intesity; //goes from zero to one.
 		
-		w = saturate(1 - dist);
-								 //saturate(w);
+		w = saturate(0.2+ .4*intesity - dist);
+
+		w = saturate(.9- dist);
+
+		//w *= w; // makes it apear square
+		//w = w > 0.1;	 //saturate(w);
 		//scol.a = intesity;
 
 		float4 c = w*col;

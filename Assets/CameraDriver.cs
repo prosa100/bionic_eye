@@ -8,9 +8,9 @@ public class CameraDriver : MonoBehaviour {
     
     // Use this for initialization
 	void Start () {
-        print(WebCamTexture.devices[0].name);
+        var name = WebCamTexture.devices[1].name;
         Application.RequestUserAuthorization(UserAuthorization.WebCam);
-        cam = new WebCamTexture();
+        cam = new WebCamTexture(name);
         GetComponent<MeshRenderer>().material.mainTexture = cam;
 
         
