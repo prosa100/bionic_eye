@@ -51,8 +51,8 @@
 				//x = saturate(depth - refDist);
 				x = 0.1*abs(depth - refDist);
 				
-				x = saturate(depth*_Speed);
-				x = pow(depth, _Speed);
+				//x = saturate(depth*_Speed);
+				//x = pow(depth, _Speed);
 				return float4(x, x, x, 1);
 				//now with technicolor!!!
 				return float4(depth, depth/10, 1/ depth, 1)%1;

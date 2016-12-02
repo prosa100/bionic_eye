@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: c24147bc051770348a4360bcf53c134c
-timeCreated: 1480188003
+timeCreated: 1480630887
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - shader: {fileID: 4800000, guid: c8bad7d1edb5b654da9c45a349a240e7, type: 3}
+  - dotTexture: {fileID: 2800000, guid: 949c1bfd9ee02ee4ab3022d4bd13488a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
