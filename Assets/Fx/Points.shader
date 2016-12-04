@@ -117,6 +117,7 @@
 		
 			
 		const float w = _DotFreq;
+		/*
 		acc += calcColor(i.uv, nearestPoint + float2(-w, 0));
 		acc += calcColor(i.uv, nearestPoint + float2(w, 0));
 		acc += calcColor(i.uv, nearestPoint + float2(0, w));
@@ -125,8 +126,14 @@
 		acc += calcColor(i.uv, nearestPoint + float2(w, w));
 		acc += calcColor(i.uv, nearestPoint + float2(-w, -w));
 		acc += calcColor(i.uv, nearestPoint + float2(w, -w));
-		
-
+		*/
+		acc = max(acc, calcColor(i.uv, nearestPoint + float2(w, 0)));
+		acc = max(acc, calcColor(i.uv, nearestPoint + float2(0, w)));
+		acc = max(acc, calcColor(i.uv, nearestPoint + float2(0, -w)));
+		acc = max(acc, calcColor(i.uv, nearestPoint + float2(-w, w)));
+		acc = max(acc, calcColor(i.uv, nearestPoint + float2(w, w)));
+		acc = max(acc, calcColor(i.uv, nearestPoint + float2(-w, -w)));
+		acc = max(acc,	calcColor(i.uv, nearestPoint + float2(w, -w)));
 
 		acc /= acc.a;
 

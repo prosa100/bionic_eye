@@ -43,13 +43,18 @@
 			float _Speed;
 			fixed4 frag (v2f i) : SV_Target
 			{
+				
 				float de = tex2D(_CameraDepthTexture, i.uv).r;
 				float depth = LinearEyeDepth(de);
-				float x = depth % 1; // 1 m mod
-
+				
+				const float far = _ProjectionParams.z;
+				float x = log(far /depth); // 1 m mod
+				
 				float refDist = _ProjectionParams.z*frac(_Time.y * _Speed);
+				
+				//x = frac(depth / refDist);
 				//x = saturate(depth - refDist);
-				x = 0.1*abs(depth - refDist);
+				//x = 0.1*abs(depth - refDist);
 				
 				//x = saturate(depth*_Speed);
 				//x = pow(depth, _Speed);
