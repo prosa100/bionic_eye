@@ -54,9 +54,8 @@
 				float x = depth/ far ; // 1 m mod
 				
 				float3 dir = normalize(float3(i.uv - 0.5,_Speed));
-				//x = length(dir / dir.z *x);
-				//x=  length(float3(0.2*(i.uv - 0.5), x));
-
+				x = length(dir / dir.z *x);
+				
 				float refDist = _ProjectionParams.z*frac(_Time.y * _Speed);
 				
 				//x = frac(depth / refDist);

@@ -53,10 +53,12 @@
 				float4 d = abs(a - c ) + abs(b - c);
 				
 				float di = dot(d, float4(.3, .4, .3, 0));
-				float ci = dot(c, float4(.2, .2, .1, 0));
-
-
-				float x = (500*pow(di,0.8) + 1)* ci;
+				float ci = dot(c, float4(.3, .4, .3, 0));
+				float x;
+				x = pow(1 - ci, 4.5);
+				x = (-5000*pow(di, 2.0) + 0.9)* x;
+				
+				//x = pow(x, 2);
 				//x = 1 - saturate(x);
 				return float4(x,x,x,1);
 			}
