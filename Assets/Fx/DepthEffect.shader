@@ -48,7 +48,7 @@
 				float depth = LinearEyeDepth(de);
 				
 				const float far = _ProjectionParams.z;
-				float x = log(far /depth); // 1 m mod
+				float x = depth/ far ; // 1 m mod
 				
 				float refDist = _ProjectionParams.z*frac(_Time.y * _Speed);
 				
