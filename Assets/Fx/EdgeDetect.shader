@@ -52,12 +52,12 @@
 				
 				float4 d = abs(a - c ) + abs(b - c);
 				
-				float di = dot(d, float4(.2, .2, .1, 0));
+				float di = dot(d, float4(.3, .4, .3, 0));
 				float ci = dot(c, float4(.2, .2, .1, 0));
 
 
-				float x = di+ ci;
-
+				float x = (500*pow(di,0.8) + 1)* ci;
+				//x = 1 - saturate(x);
 				return float4(x,x,x,1);
 			}
 			ENDCG
