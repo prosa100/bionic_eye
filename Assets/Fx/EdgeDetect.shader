@@ -55,8 +55,10 @@
 				float di = dot(d, float4(.3, .4, .3, 0));
 				float ci = dot(c, float4(.3, .4, .3, 0));
 				float x;
-				x = pow(1 - ci, 4.5);
-				x = (-5000*pow(di, 2.0) + 0.9)* x;
+
+				x = ci;
+				//x = pow(1 - x, 4.5);
+				x = pow(di, 4.0) + 0.5*ci;
 				
 				//x = pow(x, 2);
 				//x = 1 - saturate(x);

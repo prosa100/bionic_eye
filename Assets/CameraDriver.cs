@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.ImageEffects;
 
 public class CameraDriver : MonoBehaviour {
     WebCamTexture cam;
     public Transform follow;
-    
-    
+
+    public RenderTexture buffer;
+    public Material[] effects; 
+
     // Use this for initialization
-	void Start () {
-        var name = WebCamTexture.devices[1].name;
+    void Start () {
+        var name = WebCamTexture.devices[0].name;
         Application.RequestUserAuthorization(UserAuthorization.WebCam);
         cam = new WebCamTexture(name);
         GetComponent<MeshRenderer>().material.mainTexture = cam;
@@ -20,13 +23,25 @@ public class CameraDriver : MonoBehaviour {
 	}
 	
     
+
 	// Update is called once per frame
 	void Update () {
-        if (cam.didUpdateThisFrame && follow)
+        if (cam.didUpdateThisFrame)
         {
-            transform.position = follow.position;
-            transform.rotation = follow.rotation;
+            return;
+            Graphics.CopyTexture(cam, buffer);
 
+            foreach (var effect in effects)
+            {
+                Graphics.Blit(buffer, buffer, effect);
+            }
+
+
+            if (follow)
+            {
+                transform.position = follow.position;
+                transform.rotation = follow.rotation;
+            }
             // i don't know if this has anything to help prevent tering.
             // also proably not timestamped
             // I need to compesate for the latency by back positioning it.
